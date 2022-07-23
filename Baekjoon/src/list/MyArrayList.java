@@ -81,7 +81,7 @@ public class MyArrayList<T> implements IList<T> {
 				return i;
 			}
 		}
-		return -1;
+		return -1;	// index starts with 0, so return negative integer which isn't included in index.
 	}
 
 	@Override
