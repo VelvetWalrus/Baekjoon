@@ -1,7 +1,7 @@
 package list;
 
 
-// using "dummy node" for LinkedList implement.
+// using "dummy node" for LinkedList implementation.	->	remove edge cases (making code simple.) 
 public class MyLinkedList<T> implements IList<T> {
 
 	private int size;
@@ -138,10 +138,12 @@ public class MyLinkedList<T> implements IList<T> {
 		T data;
 		Node next;
 		
+		//	initialization (1)
 		Node(T data) {
 			this.data = data;
 		}
-		
+
+		//	initialization (2)
 		Node(T data, Node next){
 			this.data = data;
 			this.next = next;
