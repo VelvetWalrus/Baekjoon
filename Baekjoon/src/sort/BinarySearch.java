@@ -7,7 +7,23 @@ public class BinarySearch {
 		// 2. 중간 인덱스 위치를 기준으로 arr을 절반으로 나눈다. 
 		// 3. 나눠진 절반의 리스트에서 tartget 값을 찾는다. 
 		
+		int l = 0;
+		int r = arr.length - 1;
 		
+		int m;
+		while (l <= r) {
+			m = l + ((r-1)/2); // prevent the overflow exception 
+
+			if(arr[m] == target) {
+				return m;
+			}
+			
+			if (arr[m] < target) {
+				l = m + 1;
+			} else {
+				r = m - 1;
+			}
+		}
 		
 		return -1;
 	}
