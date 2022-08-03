@@ -47,26 +47,82 @@ public class BinarySearchTree<T extends Comparable<T>> implements ITree<T>{
 	
 	@Override
 	public void insert(T val) {
-		// TODO Auto-generated method stub
+		this.root = this.insertNode(this.root,  val);
+		this.size++;
 		
+	}
+	
+	private Node insertNode(Node node, T val) {
+		if (node == null) {
+			return new Node(val);
+		}
+		
+		if (val.compareTo(node.data) < 0) {
+			node.left = insertNode(node.left, val);
+		} else if (val.compareTo(node.data) > 0) {
+			node.right = insertNode(node.right, val);
+		}
+		
+		return node;
 	}
 
 	@Override
 	public void delete(T val) {
-		// TODO Auto-generated method stub
+		this.deleteNode(this.root,  val);
 		
 	}
 
+	private Node deleteNode(Node node, T val) {
+		if (node == null) return null;
+		
+		if (val.compareTo(node.data) < 0) {
+			node.left = deleteNode(node.left, val);
+		} else if (val.compareTo(node.data)>0) {
+			node.right = deleteNode(node.right, val);
+		} else {
+			//val == node.data
+			this.size--;
+			if (node.left == null) {
+				return node.right;
+			} else if (node.right == null) {
+				return node.left;
+			} 
+			
+			node.data = this.minNode(node.right);
+			node.right = deleteNode(node.right, node.data);
+		}
+		
+		return node;
+	}
+	
 	@Override
 	public boolean contains(T val) {
-		// TODO Auto-generated method stub
-		return false;
+		return this.containsNode(this.root,  val);
+	}
+	
+	private boolean containsNode(Node node, T val) {
+		if (node == null) {
+			return false;
+		}
+		// a.compareTo(b) 
+		// a < b -> -1
+		// a == b -> 0
+		// a > b -> 1
+		if (val.compareTo(node.data) == 0) {
+			return true;
+		}
+		
+		if (val.compareTo(node.data)<0) {
+			return containsNode(node.left, val); 
+		}
+		
+		// val.compareTo(node.data) > 0
+		return containsNode(node.right, val);
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.size;
 	}
 	
 	public List<T> preOrder(){
